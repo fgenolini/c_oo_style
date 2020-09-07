@@ -12,8 +12,8 @@ Suggestions for imitating some aspects of C++, using the C language only:
 * virtual functions
 * overriden functions
 * virtual destructor
-* exceptions
-* dynamic_cast
+* exceptions (throw, catch)
+* dynamic_cast, is_same
 * VMT
 * RAII
 * RTTI
