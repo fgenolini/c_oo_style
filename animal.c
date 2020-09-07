@@ -4,7 +4,7 @@
 #include "animal.h"
 #include "std.h"
 
-char const *animal_typeid_name() { return CLASS_NAME(animal); }
+static char const *animal_typeid_name() { return CLASS_NAME(animal); }
 
 void animal_release(struct animal *self) {
   // printf("animal_release\n");
@@ -32,12 +32,12 @@ void animal_free(struct animal **self) {
   self = NULL;
 }
 
-char const *animal_say(struct animal const *self) {
+static char const *animal_say(struct animal const *self) {
   // printf("animal_say\n");
   return self->private.sound;
 }
 
-size_t animal_length(struct animal const *self) {
+static size_t animal_length(struct animal const *self) {
   // printf("animal_length\n");
   return self->private.sound_length;
 }
