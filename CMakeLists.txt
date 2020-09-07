@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(APP_LOW_NAME c_oo_style)
 
-project(${APP_LOW_NAME} VERSION 0.0.1)
+project(${APP_LOW_NAME} VERSION 1.0.0)
 
 include(CTest)
 enable_testing()
