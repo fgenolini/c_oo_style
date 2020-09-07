@@ -1,11 +1,9 @@
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "animal.h"
 
-char const *animal_typeid_name() { return "animal"; }
+char const *animal_typeid_name() { return CLASS_NAME(animal); }
 
 void animal_release(struct animal *self) {
   // printf("animal_release\n");

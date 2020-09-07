@@ -1,5 +1,10 @@
 #pragma once
 
+#include <stdbool.h>
+#include <stdlib.h>
+
+#define CLASS_NAME(name) #name
+
 // Base class
 struct animal {
   // VMT
