@@ -17,8 +17,11 @@ struct animal {
     // Virtual destructor
     void (*release)(struct animal *self);
 
-    // Virtual function: return the sound that the animal makes
+    // Virtual function: text for the sound that the animal makes
     char const *(*say)(struct animal const *self);
+
+    // Virtual function: length of the text for the sound that the animal makes
+    size_t (*length)(struct animal const *self);
   };
 
   // Private data, do not use
