@@ -11,7 +11,7 @@
 
 // Checks if a base class pointer can be cast to a derived class pointer
 #define DYNAMIC_CAST(new_type, expression)                                     \
-  (IS_SAME(new_type, expression)) ? (struct new_type const *)a : NULL
+  (IS_SAME(new_type, expression)) ? (struct new_type const *)expression : NULL
 
 // Simulates throwing an exception by setting a bool error value
 #define THROW(error_pointer)                                                   \
