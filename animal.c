@@ -2,16 +2,23 @@
 #include <string.h>
 
 #include "animal.h"
+#include "std.h"
 
 char const *animal_typeid_name() { return CLASS_NAME(animal); }
 
 void animal_release(struct animal *self) {
   // printf("animal_release\n");
+  if (!IS_SAME(animal, self)) {
+    self->release(self);
+    return;
+  }
+
   self->length = NULL;
   self->release = NULL;
   self->say = NULL;
   self->private.sound = NULL;
   self->private.sound_length = 0;
+  // printf("animal released\n");
 }
 
 void animal_free(struct animal **self) {
