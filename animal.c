@@ -45,9 +45,7 @@ size_t animal_length(struct animal const *self) {
 void animal_make(struct animal *self, char const *sound, bool *has_error) {
   // printf("animal_make\n");
   if (!sound) {
-    if (has_error)
-      *has_error = true;
-
+    THROW(has_error);
     return;
   }
 
@@ -63,14 +61,12 @@ struct animal *animal_alloc(char const *sound, bool *has_error) {
   // printf("animal_alloc\n");
   struct animal *new_animal = (struct animal *)calloc(1, sizeof(struct animal));
   if (!new_animal) {
-    if (has_error)
-      *has_error = true;
-
+    THROW(has_error);
     return NULL;
   }
 
   animal_make(new_animal, sound, has_error);
-  if (has_error && *has_error) {
+  if (CATCH(has_error)) {
     free(new_animal);
     return NULL;
   }
