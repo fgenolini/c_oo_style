@@ -7,6 +7,7 @@ char const *animal_typeid_name() { return CLASS_NAME(animal); }
 
 void animal_release(struct animal *self) {
   // printf("animal_release\n");
+  self->length = NULL;
   self->release = NULL;
   self->say = NULL;
   self->private.sound = NULL;
@@ -16,7 +17,10 @@ void animal_release(struct animal *self) {
 void animal_free(struct animal **self) {
   // printf("animal_free\n");
   struct animal *s = *self;
+
+  // This could be an overriden function
   s->release(s);
+
   free(s);
   self = NULL;
 }
@@ -24,6 +28,11 @@ void animal_free(struct animal **self) {
 char const *animal_say(struct animal const *self) {
   // printf("animal_say\n");
   return self->private.sound;
+}
+
+size_t animal_length(struct animal const *self) {
+  // printf("animal_length\n");
+  return self->private.sound_length;
 }
 
 void animal_make(struct animal *self, char const *sound, bool *has_error) {
@@ -37,6 +46,7 @@ void animal_make(struct animal *self, char const *sound, bool *has_error) {
 
   self->private.sound = sound;
   self->private.sound_length = strlen(sound);
+  self->length = animal_length;
   self->release = animal_release;
   self->say = animal_say;
   self->typeid_name = animal_typeid_name;
