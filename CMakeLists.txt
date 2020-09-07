@@ -14,7 +14,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-set(CommonSourcesList
+set(CommonSourcesList animal.c big_animal.c
   )
 
 add_executable(${APP_LOW_NAME} ${APP_LOW_NAME}.c ${CommonSourcesList})
