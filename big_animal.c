@@ -48,7 +48,7 @@ void big_animal_make(struct big_animal *self, char const *sound,
                      size_t repeat_count, bool *has_error) {
   // printf("big_animal_make\n");
   animal_make(&self->base, sound, has_error);
-  if (has_error && *has_error)
+  if (CATCH(has_error))
     return;
 
   self->private.repeat_count = repeat_count;
@@ -86,14 +86,12 @@ struct big_animal *big_animal_alloc(char const *sound, size_t repeat_count,
   struct big_animal *new_animal =
       (struct big_animal *)calloc(1, sizeof(struct big_animal));
   if (!new_animal) {
-    if (has_error)
-      *has_error = true;
-
+    THROW(has_error);
     return NULL;
   }
 
   big_animal_make(new_animal, sound, repeat_count, has_error);
-  if (has_error && *has_error) {
+  if (CATCH(has_error)) {
     free(new_animal);
     return NULL;
   }
