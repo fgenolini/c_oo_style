@@ -1,11 +1,18 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "animal.h"
 #include "big_animal.h"
 
 // Inject object, so that calling function can simulate RAII
 void use_animal(struct animal const *a) {
-  printf("%s %s\n", a->typeid_name(), a->say(a));
+  printf("%s %.*s\n", a->typeid_name(), (int)a->length(a), a->say(a));
+
+  // Dynamic cast
+  if (strcmp(a->typeid_name(), CLASS_NAME(big_animal)) == 0) {
+    struct big_animal const *b_a = (struct big_animal const *)a;
+    printf("  repeated %ld times\n", b_a->repeat_count(b_a));
+  }
 }
 
 // RAII simulated by calling a "use" function
