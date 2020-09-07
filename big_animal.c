@@ -4,7 +4,7 @@
 #include "big_animal.h"
 #include "std.h"
 
-char const *big_animal_typeid_name() { return CLASS_NAME(big_animal); }
+static char const *big_animal_typeid_name() { return CLASS_NAME(big_animal); }
 
 void big_animal_release(struct big_animal *self) {
   // printf("big_animal_release\n");
@@ -31,16 +31,16 @@ void big_animal_free(struct big_animal **self) {
   self = NULL;
 }
 
-char const *big_animal_say(struct big_animal const *self) {
+static char const *big_animal_say(struct big_animal const *self) {
   // printf("big_animal_say\n");
   return self->private.big_sound;
 }
 
-size_t big_animal_length(struct big_animal const *self) {
+static size_t big_animal_length(struct big_animal const *self) {
   return self->private.big_sound_length;
 }
 
-size_t big_animal_repeat_count(struct big_animal const *self) {
+static size_t big_animal_repeat_count(struct big_animal const *self) {
   return self->private.repeat_count;
 }
 
