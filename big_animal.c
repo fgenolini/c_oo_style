@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "big_animal.h"
+#include "std.h"
 
 char const *big_animal_typeid_name() { return CLASS_NAME(big_animal); }
 
@@ -19,6 +20,7 @@ void big_animal_release(struct big_animal *self) {
   self->private.big_sound_length = 0;
   self->private.repeat_count = 0;
   self->base.release(&self->base);
+  // printf("big_animal released\n");
 }
 
 void big_animal_free(struct big_animal **self) {
