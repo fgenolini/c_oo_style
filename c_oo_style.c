@@ -6,7 +6,7 @@
 #include "std.h"
 
 // Inject object, so that calling function can simulate RAII
-void use_animal(struct animal const *a) {
+static void use_animal(struct animal const *a) {
   printf("%s %.*s\n", a->typeid_name(), (int)a->length(a), a->say(a));
   struct big_animal const *b_a = DYNAMIC_CAST(big_animal, a);
   if (!b_a)
@@ -18,16 +18,12 @@ void use_animal(struct animal const *a) {
 // RAII simulated by calling a "use" function
 // between calls of constructor and destructor
 // with animal allocated on the heap
-void animal_raii() {
-  // Constructor exception simulated by error parameter
-  bool animal_alloc_error = false;
-
+static void raii_heap(bool *has_error) {
   // Constructor called before "use" function
-  struct animal *a = animal_alloc("eek", &animal_alloc_error);
-  if (animal_alloc_error)
-    exit(EXIT_FAILURE);
+  struct animal *a = animal_alloc("eek", has_error);
+  if (CATCH(has_error))
+    return;
 
-  // printf("Animal\n");
   use_animal(a);
 
   // Destructor called after "use" function
@@ -36,15 +32,11 @@ void animal_raii() {
 
 // Polymorphic call to derived functions from base object pointer
 // with big_animal allocated on the stack
-void big_animal_polymorphic() {
-  bool animal_alloc_error = false;
+static void raii_stack_polymorphic(bool *has_error) {
   struct big_animal b_a;
-  big_animal_make(&b_a, "moo", 2ul, &animal_alloc_error);
-  if (animal_alloc_error)
-    exit(EXIT_FAILURE);
-
-  // printf("Big animal\n");
-  // printf("Big animal length: %lu\n", b_a->length(b_a));
+  big_animal_make(&b_a, "moo", 2ul, has_error);
+  if (CATCH(has_error))
+    return;
 
   // Since VMTs overlap (fist functions have the same semantics)
   // casting the derived object to the base object will work
@@ -60,9 +52,19 @@ void big_animal_polymorphic() {
   animal_release(base);
 }
 
+// Exceptions simulated by error value
+static bool exception_as_error = false;
+static bool *has_error = &exception_as_error;
+
 int main() {
-  animal_raii();
-  big_animal_polymorphic();
+  raii_heap(has_error);
+  if (CATCH(has_error))
+    exit(EXIT_FAILURE);
+
+  raii_stack_polymorphic(has_error);
+  if (CATCH(has_error))
+    exit(EXIT_FAILURE);
+
   exit(EXIT_SUCCESS);
   return 0;
 }
