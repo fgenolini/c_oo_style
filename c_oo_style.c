@@ -1,13 +1,10 @@
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "animal.h"
 #include "big_animal.h"
 
 // Inject object, so that calling function can simulate RAII
-void use_animal(struct animal *a) {
+void use_animal(struct animal const *a) {
   printf("%s %s\n", a->typeid_name(), a->say(a));
 }
 
