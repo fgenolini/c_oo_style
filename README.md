@@ -1,5 +1,8 @@
 # c_oo_style
-C code, object oriented (C++) style.
+Example C code, in the object oriented (C++) style.
+
+A base class, called animal, is used to derive another class, called big_animal,
+which reuses code from animal.
 
 ## Scope
 Suggestions for imitating some aspects of C++, using the C language only:
