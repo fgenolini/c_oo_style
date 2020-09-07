@@ -16,8 +16,12 @@ struct big_animal {
     // Overriden virtual function: return the sound that the big_animal makes
     char const *(*say)(struct big_animal const *self);
 
-    // Virtual function
+    // Overriden virtual function: length of the text for the sound that the
+    // big_animal makes
     size_t (*length)(struct big_animal const *self);
+
+    // Virtual function: number of times that the base sound is repeated
+    size_t (*repeat_count)(struct big_animal const *self);
   };
 
   struct animal base;
