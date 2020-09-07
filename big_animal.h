@@ -41,6 +41,9 @@ big_animal_alloc(char const *sound, size_t repeat_count, bool *has_error);
 // Frees a big_animal instance from the heap, and sets the pointer to NULL
 extern void big_animal_free(struct big_animal **self);
 
-// Protected constructor (initialisation only, no allocation)
+// Constructor; initialisation only, no allocation
 extern void big_animal_make(struct big_animal *self, char const *sound,
                             size_t repeat_count, bool *has_error);
+
+// Destructor; de-initialisation only, no de-allocation
+extern void big_animal_release(struct big_animal *self);
