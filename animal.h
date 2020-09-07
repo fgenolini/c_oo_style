@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define CLASS_NAME(name) #name
-
 // Base class
 struct animal {
   // VMT
@@ -38,6 +36,9 @@ extern struct animal *animal_alloc(char const *sound, bool *has_error);
 // This is a virtual destructor
 extern void animal_free(struct animal **self);
 
-// Protected constructor (initialisation only, no allocation)
+// Constructor; initialisation only, no allocation
 extern void animal_make(struct animal *self, char const *sound,
                         bool *has_error);
+
+// Destructor; de-initialisation only, no de-allocation
+extern void animal_release(struct animal *self);
