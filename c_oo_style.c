@@ -1,12 +1,11 @@
 #include <stdio.h>
-#include <string.h>
 
 #include "animal.h"
 #include "big_animal.h"
-#include "std.h"
 
 #define ANIMAL_NOISE "eek"
 #define BIG_ANIMAL_NOISE "moo"
+#define BIG_ANIMAL_NOISE_REPEAT 2ul
 
 // Inject object, so that calling function can simulate RAII
 static void use_animal(struct animal const *a) {
@@ -37,7 +36,7 @@ static void raii_heap(bool *has_error) {
 // with big_animal allocated on the stack
 static void raii_stack_polymorphic(bool *has_error) {
   struct big_animal b_a;
-  big_animal_make(&b_a, BIG_ANIMAL_NOISE, 2ul, has_error);
+  big_animal_make(&b_a, BIG_ANIMAL_NOISE, BIG_ANIMAL_NOISE_REPEAT, has_error);
   if (CATCH(has_error))
     return;
 
