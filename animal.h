@@ -5,16 +5,21 @@
 
 #include "std.h"
 
+struct animal;
+
+// De-initialiser for animal objects, does not de-allocate
+typedef void (*animal_release_t)(struct animal *self);
+
 // Base class
 struct animal {
   struct BASE_VMT {
     // RTTI typeid name (no this/self pointer)
     // This is virtual, unlike in C++
     // Can only be called from an instance, so not really a class function
-    char const *(*typeid_name)(void);
+    typeid_name_t typeid_name;
 
     // Virtual destructor
-    void (*release)(struct animal *self);
+    animal_release_t release;
 
     // Virtual function: text for the sound that the animal makes
     char const *(*say)(struct animal const *self);
