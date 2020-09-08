@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string.h>
+
 // Gets the textual representation of the name of a class (without the struct
 // before it)
 #define CLASS_NAME(name) #name
