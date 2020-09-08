@@ -7,7 +7,7 @@ struct big_animal {
   struct DERIVED_VMT(animal) {
     // RTTI typeid name (no this/self pointer)
     // This is an overriden virtual class function, unlike in C++
-    char const *(*typeid_name)(void);
+    typeid_name_t typeid_name;
 
     // Overriden virtual destructor
     void (*release)(struct big_animal *self);
