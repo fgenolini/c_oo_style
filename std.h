@@ -20,3 +20,12 @@
 
 // Simulates catching an exception by checking a bool error value
 #define CATCH(error_pointer) (error_pointer && *error_pointer)
+
+// Virtual method table
+#define VMT
+
+// Virtual method table for a base class
+#define BASE_VMT
+
+// Virtual method table for a derived class, should start with the base VMT
+#define DERIVED_VMT(base_vmt)
