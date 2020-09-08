@@ -4,7 +4,9 @@
 #include "big_animal.h"
 #include "std.h"
 
-static char const *big_animal_typeid_name() { return CLASS_NAME(big_animal); }
+static char const *big_animal_typeid_name(void) {
+  return CLASS_NAME(big_animal);
+}
 
 void big_animal_release(struct big_animal *self) {
   // printf("big_animal_release\n");
