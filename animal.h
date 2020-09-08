@@ -3,14 +3,15 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "std.h"
+
 // Base class
 struct animal {
-  // VMT
-  struct {
+  struct BASE_VMT {
     // RTTI typeid name (no this/self pointer)
     // This is virtual, unlike in C++
     // Can only be called from an instance, so not really a class function
-    char const *(*typeid_name)();
+    char const *(*typeid_name)(void);
 
     // Virtual destructor
     void (*release)(struct animal *self);
@@ -20,7 +21,7 @@ struct animal {
 
     // Virtual function: length of the text for the sound that the animal makes
     size_t (*length)(struct animal const *self);
-  };
+  } VMT;
 
   // Private data, do not use
   struct private_animal {
