@@ -3,8 +3,10 @@
 static char const *animal_typeid_name(void) { return CLASS_NAME(animal); }
 
 void animal_release(struct animal *self) {
-  if (!IS_SAME(animal, self)) {
-    self->release(self);
+  animal_release_t release = self->release;
+  if (release != animal_release) {
+    // Call overriden function
+    release(self);
     return;
   }
 
