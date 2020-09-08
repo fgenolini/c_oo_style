@@ -1,13 +1,8 @@
-#include <stdio.h>
-#include <string.h>
-
 #include "animal.h"
-#include "std.h"
 
 static char const *animal_typeid_name(void) { return CLASS_NAME(animal); }
 
 void animal_release(struct animal *self) {
-  // printf("animal_release\n");
   if (!IS_SAME(animal, self)) {
     self->release(self);
     return;
@@ -19,11 +14,9 @@ void animal_release(struct animal *self) {
   self->typeid_name = NULL;
   self->private.sound = NULL;
   self->private.sound_length = 0;
-  // printf("animal released\n");
 }
 
 void animal_free(struct animal **self) {
-  // printf("animal_free\n");
   struct animal *s = *self;
 
   // This could be an overriden function
@@ -34,17 +27,14 @@ void animal_free(struct animal **self) {
 }
 
 static char const *animal_say(struct animal const *self) {
-  // printf("animal_say\n");
   return self->private.sound;
 }
 
 static size_t animal_length(struct animal const *self) {
-  // printf("animal_length\n");
   return self->private.sound_length;
 }
 
 void animal_make(struct animal *self, char const *sound, bool *has_error) {
-  // printf("animal_make\n");
   if (!sound) {
     THROW(has_error);
     return;
@@ -59,7 +49,6 @@ void animal_make(struct animal *self, char const *sound, bool *has_error) {
 }
 
 struct animal *animal_alloc(char const *sound, bool *has_error) {
-  // printf("animal_alloc\n");
   struct animal *new_animal = (struct animal *)calloc(1, sizeof(struct animal));
   if (!new_animal) {
     THROW(has_error);
