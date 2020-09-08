@@ -1,15 +1,10 @@
-#include <stdio.h>
-#include <string.h>
-
 #include "big_animal.h"
-#include "std.h"
 
 static char const *big_animal_typeid_name(void) {
   return CLASS_NAME(big_animal);
 }
 
 void big_animal_release(struct big_animal *self) {
-  // printf("big_animal_release\n");
   self->length = NULL;
   self->release = NULL;
   self->repeat_count = NULL;
@@ -22,11 +17,9 @@ void big_animal_release(struct big_animal *self) {
   self->private.big_sound_length = 0;
   self->private.repeat_count = 0;
   self->base.release(&self->base);
-  // printf("big_animal released\n");
 }
 
 void big_animal_free(struct big_animal **self) {
-  // printf("big_animal_free\n");
   struct big_animal *s = *self;
   s->release(s);
   free(s);
@@ -34,7 +27,6 @@ void big_animal_free(struct big_animal **self) {
 }
 
 static char const *big_animal_say(struct big_animal const *self) {
-  // printf("big_animal_say\n");
   return self->private.big_sound;
 }
 
@@ -48,7 +40,6 @@ static size_t big_animal_repeat_count(struct big_animal const *self) {
 
 void big_animal_make(struct big_animal *self, char const *sound,
                      size_t repeat_count, bool *has_error) {
-  // printf("big_animal_make\n");
   animal_make(&self->base, sound, has_error);
   if (CATCH(has_error))
     return;
@@ -84,7 +75,6 @@ void big_animal_make(struct big_animal *self, char const *sound,
 
 struct big_animal *big_animal_alloc(char const *sound, size_t repeat_count,
                                     bool *has_error) {
-  // printf("big_animal_alloc\n");
   struct big_animal *new_animal =
       (struct big_animal *)calloc(1, sizeof(struct big_animal));
   if (!new_animal) {
