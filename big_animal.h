@@ -2,8 +2,7 @@
 
 #include "animal.h"
 
-// Derived from animal
-struct big_animal {
+struct big_animal BASED_ON(animal) {
   struct DERIVED_VMT(animal) {
     // RTTI typeid name (no this/self pointer)
     // This is an overriden virtual class function, unlike in C++
