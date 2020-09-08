@@ -31,3 +31,6 @@
 
 // Virtual method table for a derived class, should start with the base VMT
 #define DERIVED_VMT(base_vmt)
+
+// Function that gets the RTTI typeid name
+typedef char const *(*typeid_name_t)(void);
