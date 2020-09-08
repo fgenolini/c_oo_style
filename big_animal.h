@@ -4,11 +4,10 @@
 
 // Derived from animal
 struct big_animal {
-  // Overriden VMT, must start the same as animal.VMT
-  struct {
+  struct DERIVED_VMT(animal) {
     // RTTI typeid name (no this/self pointer)
     // This is an overriden virtual class function, unlike in C++
-    char const *(*typeid_name)();
+    char const *(*typeid_name)(void);
 
     // Overriden virtual destructor
     void (*release)(struct big_animal *self);
@@ -22,7 +21,7 @@ struct big_animal {
 
     // Virtual function: number of times that the base sound is repeated
     size_t (*repeat_count)(struct big_animal const *self);
-  };
+  } VMT;
 
   struct animal base;
 
