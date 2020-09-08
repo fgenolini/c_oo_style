@@ -23,6 +23,9 @@
 // Simulates catching an exception by checking a bool error value
 #define CATCH(error_pointer) (error_pointer && *error_pointer)
 
+// This is a derived class, based on the specified class
+#define BASED_ON(base_class)
+
 // Virtual method table
 #define VMT
 
