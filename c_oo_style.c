@@ -51,7 +51,7 @@ static void raii_stack_polymorphic(bool *has_error) {
 
   // De-initialise using the base class pointer,
   // calling the virtual destructor for the derived class, not the base class
-  animal_release(a);
+  a->release(a);
 }
 
 // Exceptions simulated by error value
